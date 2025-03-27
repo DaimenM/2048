@@ -2,21 +2,18 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
         Parent root = loader.load();
-        Board game = new Board();
         MainController mainController = loader.getController();
-        setBoard(game, mainController);
+        setBoard(mainController.getBoard(), mainController);
         primaryStage.setTitle("2048");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        Scene scene = new Scene(root, 600, 600);
+        primaryStage.setScene(scene);
+        scene.setOnKeyPressed(event -> mainController.handleKeyPress(event));
         primaryStage.show();
     }
 
@@ -31,7 +28,7 @@ public class App extends Application {
         
         launch(args);
     }
-    public void setBoard(Board game, MainController mainController){
+    public static void setBoard(Board game, MainController mainController){
         for(int i=0;i<game.getSize();i++){
             for(int j=0;j<game.getSize();j++){
                 if(game.getBoard()[i][j].getValue()==0){

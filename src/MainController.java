@@ -1,13 +1,16 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
-
-import java.lang.reflect.Array;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.ColumnConstraints;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 
+
 public class MainController {
+     @FXML
+    private ColumnConstraints grid;
+
     @FXML
     private Rectangle square00;
 
@@ -105,6 +108,8 @@ public class MainController {
     private Label val33 = new Label();
 
     private ArrayList<ArrayList<Label>> labels = new ArrayList<>();
+
+    private Board game;
     
     @FXML
     public void initialize() {
@@ -113,9 +118,36 @@ public class MainController {
         labels.add(new ArrayList<>(Arrays.asList(val10,val11,val12,val13)));
         labels.add(new ArrayList<>(Arrays.asList(val20,val21,val22,val23)));
         labels.add(new ArrayList<>(Arrays.asList(val30,val31,val32,val33)));
+        game = new Board();
+    }
+    public void handleKeyPress(KeyEvent e){
+        switch(e.getCode()){
+            case UP:
+                game.moveUp();
+                App.setBoard(game, this);
+                break;
+            case DOWN:
+                game.moveDown();
+                App.setBoard(game, this);
+                break;
+            case LEFT:
+                game.moveLeft();
+                App.setBoard(game, this);
+                break;
+            case RIGHT:
+                game.moveRight();
+                App.setBoard(game, this);
+                break;
+            default:
+                break;
+        }
     }
     
     public ArrayList<ArrayList<Label>> getLabels() {
         return labels;
     }
+    public Board getBoard() {
+        return game;
+    }
+
 }
