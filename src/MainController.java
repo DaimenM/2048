@@ -3,6 +3,7 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.input.SwipeEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -127,6 +128,29 @@ public class MainController {
         squares.add(new ArrayList<>(Arrays.asList(square30,square31,square32,square33)));
 
         game = new Board();
+    }
+    @FXML
+    void moveDown(SwipeEvent event) {
+        game.moveDown();
+        App.setBoard(game, this);
+    }
+
+    @FXML
+    void moveLeft(SwipeEvent event) {
+        game.moveLeft();
+        App.setBoard(game, this);
+    }
+
+    @FXML
+    void moveRight(SwipeEvent event) {
+        game.moveRight();
+        App.setBoard(game, this);
+    }
+
+    @FXML
+    void moveUp(SwipeEvent event) {
+        game.moveUp();
+        App.setBoard(game, this);
     }
     public void handleKeyPress(KeyEvent e){
         switch(e.getCode()){

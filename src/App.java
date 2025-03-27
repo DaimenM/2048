@@ -17,6 +17,10 @@ public class App extends Application {
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setScene(scene);
         scene.setOnKeyPressed(event -> mainController.handleKeyPress(event));
+        scene.setOnSwipeUp(event -> mainController.moveUp(event));
+        scene.setOnSwipeDown(event -> mainController.moveDown(event));
+        scene.setOnSwipeLeft(event -> mainController.moveLeft(event));
+        scene.setOnSwipeRight(event -> mainController.moveRight(event));
         primaryStage.show();
     }
     public static void endGame(Stage endStage,MainController mainController) throws Exception{
