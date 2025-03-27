@@ -2,6 +2,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 public class MainController {
     @FXML
     private Rectangle square00;
@@ -52,50 +57,65 @@ public class MainController {
     private Rectangle square33;
 
     @FXML
-    public Label val00 = new Label("val");
+    private Label val00 = new Label();
 
     @FXML
-    private Label val01;
+    private Label val01 = new Label();
 
     @FXML
-    private Label val02;
+    private Label val02 = new Label();
 
     @FXML
-    private Label val03;
+    private Label val03 = new Label();
 
     @FXML
-    private Label val10;
+    private Label val10 = new Label();
 
     @FXML
-    private Label val11;
+    private Label val11 = new Label();
 
     @FXML
-    private Label val12;
+    private Label val12 = new Label();
 
     @FXML
-    private Label val13;
+    private Label val13 = new Label();
 
     @FXML
-    private Label val20;
+    private Label val20 = new Label();
 
     @FXML
-    private Label val21;
+    private Label val21 = new Label();
 
     @FXML
-    private Label val22;
+    private Label val22 = new Label();
 
     @FXML
-    private Label val23;
+    private Label val23 = new Label();
 
     @FXML
-    private Label val30;
+    private Label val30 = new Label();
 
     @FXML
-    private Label val31;
+    private Label val31 = new Label();
 
     @FXML
-    private Label val32;
+    private Label val32 = new Label();
 
     @FXML
-    private Label val33;
+    private Label val33 = new Label();
+
+    private ArrayList<ArrayList<Label>> labels = new ArrayList<>();
+    
+    @FXML
+    public void initialize() {
+        // Move the labels initialization to the initialize method
+        labels.add(new ArrayList<>(Arrays.asList(val00,val01,val02,val03)));
+        labels.add(new ArrayList<>(Arrays.asList(val10,val11,val12,val13)));
+        labels.add(new ArrayList<>(Arrays.asList(val20,val21,val22,val23)));
+        labels.add(new ArrayList<>(Arrays.asList(val30,val31,val32,val33)));
+    }
+    
+    public ArrayList<ArrayList<Label>> getLabels() {
+        return labels;
+    }
 }
