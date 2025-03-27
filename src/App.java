@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 public class App extends Application {
     @Override
@@ -10,6 +11,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
         Parent root = loader.load();
         MainController mainController = loader.getController();
+        mainController.square00.setFill(Color.rgb(255, 255, 255));
         setBoard(mainController.getBoard(), mainController);
         primaryStage.setTitle("2048");
         Scene scene = new Scene(root, 600, 600);
@@ -41,6 +43,7 @@ public class App extends Application {
                     mainController.getLabels().get(i).get(j).setText(" ");
                 }
                 else mainController.getLabels().get(i).get(j).setText(game.getBoard()[i][j].getValue()+"");
+                mainController.getSquares().get(i).get(j).setFill(game.getBoard()[i][j].getColor(game.getBoard()[i][j].getValue()));
             }
         }
         if(game.isGameOver()){

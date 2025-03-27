@@ -12,7 +12,7 @@ public class MainController {
     private ColumnConstraints grid;
 
     @FXML
-    private Rectangle square00;
+    public Rectangle square00;
 
     @FXML
     private Rectangle square01;
@@ -109,6 +109,8 @@ public class MainController {
 
     private ArrayList<ArrayList<Label>> labels = new ArrayList<>();
 
+    private ArrayList<ArrayList<Rectangle>> squares = new ArrayList<>();
+
     private Board game;
     
     @FXML
@@ -118,6 +120,12 @@ public class MainController {
         labels.add(new ArrayList<>(Arrays.asList(val10,val11,val12,val13)));
         labels.add(new ArrayList<>(Arrays.asList(val20,val21,val22,val23)));
         labels.add(new ArrayList<>(Arrays.asList(val30,val31,val32,val33)));
+        
+        squares.add(new ArrayList<>(Arrays.asList(square00,square01,square02,square03)));
+        squares.add(new ArrayList<>(Arrays.asList(square10,square11,square12,square13)));
+        squares.add(new ArrayList<>(Arrays.asList(square20,square21,square22,square23)));
+        squares.add(new ArrayList<>(Arrays.asList(square30,square31,square32,square33)));
+
         game = new Board();
     }
     public void handleKeyPress(KeyEvent e){
@@ -145,6 +153,9 @@ public class MainController {
     
     public ArrayList<ArrayList<Label>> getLabels() {
         return labels;
+    }
+    public ArrayList<ArrayList<Rectangle>> getSquares() {
+        return squares;
     }
     public Board getBoard() {
         return game;
