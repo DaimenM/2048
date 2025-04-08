@@ -2,11 +2,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 public class EndGameController {
+    private Stage stage;
 
     @FXML
     private Button close;
+
+    @FXML
+    private Label score = new Label();
 
     @FXML
     private Button replay;
@@ -24,10 +29,7 @@ public class EndGameController {
     @FXML
     void replay(MouseEvent event) {
         try {
-        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        stage.close();
-        Stage primaryStage = new Stage();
-            new App().start(primaryStage);
+            new App().start(stage);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,5 +40,15 @@ public class EndGameController {
     public Button getReplay() {
         return replay;
     }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    public Stage getStage() {
+        return stage;
 
+}
+public void setScore(int score) {
+    this.score.setText("Score: " + score);
+    this.score.setAlignment(javafx.geometry.Pos.CENTER);
+}
 }

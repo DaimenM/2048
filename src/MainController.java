@@ -2,15 +2,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.SwipeEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 
 
 public class MainController {
+    private Stage stage;
+
      @FXML
-    private ColumnConstraints grid;
+    private GridPane gameGrid = new GridPane();
+
+    @FXML
+    private Label quit = new Label();
+
+    @FXML
+    private Label restart = new Label();
+
+    @FXML
+    private Label score = new Label();
 
     @FXML
     public Rectangle square00;
@@ -128,6 +141,24 @@ public class MainController {
         squares.add(new ArrayList<>(Arrays.asList(square30,square31,square32,square33)));
 
         game = new Board();
+        score.setText("Score: " + game.getScore());
+        gameGrid.addEventHandler(SwipeEvent.SWIPE_UP,event -> moveUp(event));
+        gameGrid.addEventHandler(SwipeEvent.SWIPE_DOWN,event -> moveDown(event));
+        gameGrid.addEventHandler(SwipeEvent.SWIPE_LEFT,event -> moveLeft(event));
+        gameGrid.addEventHandler(SwipeEvent.SWIPE_RIGHT,event -> moveRight(event));
+        restart.setOnMouseClicked(event -> restart(event));
+        quit.setOnMouseClicked(event -> quit(event));
+
+    }
+    public void setSwipeEvents(){
+    for(int i=0;i<game.getSize();i++){
+        for(int j=0;j<game.getSize();j++){
+            squares.get(i).get(j).addEventHandler(SwipeEvent.SWIPE_UP,event -> moveUp(event));
+            squares.get(i).get(j).addEventHandler(SwipeEvent.SWIPE_DOWN,event -> moveDown(event));
+            squares.get(i).get(j).addEventHandler(SwipeEvent.SWIPE_LEFT,event -> moveLeft(event));
+            squares.get(i).get(j).addEventHandler(SwipeEvent.SWIPE_RIGHT,event -> moveRight(event));
+        }
+        }
     }
     @FXML
     void moveDown(SwipeEvent event) {
@@ -184,5 +215,36 @@ public class MainController {
     public Board getBoard() {
         return game;
     }
-
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    public Stage getStage() {
+        return stage;
+    }
+    public Label getScore() {
+        return score;
+    }
+    public void restart(MouseEvent event) {
+        ConfirmPopupController confirm = App.loadConfirm();
+        confirm.setTitle("Restart Game?");
+        confirm.setContent("Are you sure you want to restart the game?");
+        confirm.getConfirmButton().setOnMouseClicked(e -> {
+        
+        
+            try{
+            confirm.getStage().close();
+            new App().start(stage);
+        } catch(Exception err){
+            err.printStackTrace();
+        };
+    });
+    }
+    public void quit(MouseEvent event) {
+        ConfirmPopupController confirm = App.loadConfirm();
+        confirm.setTitle("Quit Game?");
+        confirm.setContent("Are you sure you want to quit the game?");
+        confirm.getConfirmButton().setOnMouseClicked(e -> {
+            System.exit(0);
+        });
+    }
 }

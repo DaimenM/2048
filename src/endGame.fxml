@@ -5,20 +5,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EndGameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EndGameController">
    <children>
-      <Label layoutX="166.0" layoutY="29.0" prefHeight="70.0" prefWidth="268.0" text="GAME OVER" textAlignment="CENTER">
+      <Label layoutX="137.0" layoutY="28.0" prefHeight="71.0" prefWidth="339.0" text="GAME OVER" textAlignment="CENTER">
          <font>
-            <Font size="48.0" />
+            <Font name="Arial Black" size="48.0" />
          </font>
       </Label>
-      <Label layoutX="211.0" layoutY="99.0" prefHeight="27.0" prefWidth="178.0" text="you are out of moves.">
+      <Label layoutX="210.0" layoutY="98.0" prefHeight="27.0" prefWidth="173.0" text="you are out of moves.">
          <font>
-            <Font size="18.0" />
+            <Font name="Goudy Old Style" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="replay" layoutX="182.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#replay" prefHeight="46.0" prefWidth="82.0" text="Replay" />
-      <Button fx:id="close" layoutX="337.0" layoutY="239.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="46.0" prefWidth="82.0" text="Close" />
+      <Button fx:id="replay" layoutX="120.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#replay" prefHeight="46.0" prefWidth="156.0" text="Replay" />
+      <Button fx:id="close" layoutX="300.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="46.0" prefWidth="167.0" text="Close" />
+      <Label fx:id="score" layoutX="184.0" layoutY="165.0" prefHeight="35.0" prefWidth="226.0" text="Score">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

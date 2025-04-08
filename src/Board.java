@@ -2,17 +2,40 @@ import java.util.Random;
 public class Board {
 	private static final int size = 4;
 	private Block[][] gameBoard;
+	private int score;
 	public Board() {
+		this.score = 0;
 		gameBoard = new Block[size][size];
 		int x1 = obtainRandom(0,3);
 		int y1 = obtainRandom(0,3);
 		int x2 = obtainRandom(0,3);
 		int y2 = obtainRandom(0,3);
+		while(true){
+			if(x1==x2&&y1==y2) {
+				x2 = obtainRandom(0,3);
+				y2 = obtainRandom(0,3);
+			}
+			else break;
+		}
 		for(int i=0;i<size;i++)
 			for(int j=0;j<size;j++) {
 				if((i==x1&&j==y1)||(i==x2&&j==y2)) gameBoard[i][j] = new Block(2,i,j);
 				else gameBoard[i][j] = new Block(0,i,j);
 			}
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int updateScore(){
+		int updatedScore = 0;
+		for(int i=0;i<size;i++)
+			for(int j=0;j<size;j++) {
+				if(gameBoard[i][j].getIsMerged()) updatedScore+=gameBoard[i][j].getValue();
+			}
+		return updatedScore;
 	}
     public int getSize() {
         return size;
@@ -46,7 +69,7 @@ public class Board {
 		}
 			}
 		}
-		
+		setScore(getScore()+updateScore());
 		if(availableMove) generateValue();
 	}
 	public void moveLeft() {
@@ -73,6 +96,7 @@ public class Board {
 				}
 			}
 		}
+		setScore(getScore()+updateScore());
 		if(availableMove) generateValue();
 	}
 	public void moveUp() {
@@ -98,6 +122,7 @@ public class Board {
 				}
 			}
 				}
+				setScore(getScore()+updateScore());
 		if(availableMove) generateValue();
 	}
 	public void moveDown() {
@@ -123,6 +148,7 @@ public class Board {
 		}
 			}
 		}
+		setScore(getScore()+updateScore());
 		if(availableMove) generateValue();
 	}
 	public void merge(String direction, Block b1, Block b2 ) {
